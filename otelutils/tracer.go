@@ -78,6 +78,10 @@ func TracerProviderFromEnv(ctx context.Context, serviceName string, onErr func(e
 	)
 
 	otelTracesExporter := os.Getenv("OTEL_TRACES_EXPORTER")
+	if otelTracesExporter == "" || otelTracesExporter == "none" {
+		// No TracerProvider was created because OTEL_TRACES_EXPORTER wasn't set, or was set to none
+		return func() {}
+	}
 	if otelTracesExporter == "jaeger" {
 		jaegerEndpoint := os.Getenv("OTEL_EXPORTER_JAEGER_ENDPOINT")
 		if jaegerEndpoint == "" {
@@ -90,6 +94,9 @@ func TracerProviderFromEnv(ctx context.Context, serviceName string, onErr func(e
 				return func() {}
 			}
 		}
+	} else {
+		onErr(errors.Errorf("Unknown OTEL_TRACES_EXPORTER type: %s", otelTracesExporter))
+		return func() {}
 	}
 
 	otel.SetTracerProvider(tracerProvider)
