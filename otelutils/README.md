@@ -6,7 +6,7 @@ Do:
 
 ```go
 var serviceName = 'some-service-name'
-var tracerCtx = context.WithCancel(context.Background())
+var tracerCtx, cancel = context.WithCancel(context.Background())
 defer cancel()
 shutdown := otelutils.TracerProviderFromEnv(tracerCtx, serviceName, func(e error) { log.Fatal(e) })
 defer shutdown()
