@@ -1,9 +1,49 @@
-package logging
+package httperror
 
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
+
+// HTTPErrorHandler is an echo.HTTPErrorHandler for this application.
+func HTTPErrorHandler(err error, c echo.Context) {
+	code := http.StatusInternalServerError
+	var body interface{}
+
+	switch t := err.(type) {
+	case ErrorResponse:
+		code = http.StatusBadRequest
+		body = t
+	case *ErrorResponse:
+		code = http.StatusBadRequest
+		body = t
+	case *echo.HTTPError:
+		echoErr := t
+
+		code = echoErr.Code
+
+		errResp := ErrorResponse{
+			ErrorCode: echoErr.Code,
+		}
+
+		switch suberr := echoErr.Message.(type) {
+		case string:
+			errResp.Message = suberr
+		case error:
+			errResp.Message = suberr.Error()
+		default:
+			errResp.Message = "unknown message type"
+		}
+
+		body = NewErrorResponse(errResp)
+	default:
+		body = NewErrorResponse(err)
+	}
+
+	c.JSON(code, body) //nolint - lack of return value is required by Echo.
+}
 
 // ErrorResponse represents an HTTP response body containing error information. This type implements
 // the error interface so that it can be returned as an error from from existing functions.
