@@ -2,7 +2,11 @@ module github.com/cyverse-de/go-mod/httperror
 
 go 1.18
 
-require github.com/labstack/echo/v4 v4.7.2
+require (
+	github.com/cyverse-de/go-mod/logging v0.0.1
+	github.com/labstack/echo/v4 v4.7.2
+	github.com/sirupsen/logrus v1.8.1
+)
 
 require (
 	github.com/labstack/gommon v0.3.1 // indirect
@@ -12,6 +16,6 @@ require (
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
-	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
+	golang.org/x/sys v0.0.0-20220403205710-6acee93ad0eb // indirect
 	golang.org/x/text v0.3.7 // indirect
 )

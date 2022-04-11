@@ -4,8 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/cyverse-de/go-mod/logging"
 	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 )
+
+var Log = logging.Log.WithFields(logrus.Fields{"package": "httperror"})
 
 // HTTPErrorHandler is an echo.HTTPErrorHandler for this application.
 func HTTPErrorHandler(err error, c echo.Context) {
@@ -14,10 +18,18 @@ func HTTPErrorHandler(err error, c echo.Context) {
 
 	switch t := err.(type) {
 	case ErrorResponse:
-		code = http.StatusBadRequest
+		if t.HTTPStatusCode != 0 {
+			code = t.HTTPStatusCode
+		} else {
+			code = http.StatusBadRequest
+		}
 		body = t
 	case *ErrorResponse:
-		code = http.StatusBadRequest
+		if t.HTTPStatusCode != 0 {
+			code = t.HTTPStatusCode
+		} else {
+			code = http.StatusBadRequest
+		}
 		body = t
 	case *echo.HTTPError:
 		echoErr := t
@@ -50,9 +62,10 @@ func HTTPErrorHandler(err error, c echo.Context) {
 //
 // swagger:response errorResponse
 type ErrorResponse struct {
-	Message   string                  `json:"message"`
-	ErrorCode int                     `json:"error_code,omitempty"`
-	Details   *map[string]interface{} `json:"details,omitempty"`
+	Message        string                  `json:"message"`
+	ErrorCode      int                     `json:"error_code,omitempty"`
+	HTTPStatusCode int                     `json:"-"`
+	Details        *map[string]interface{} `json:"details,omitempty"`
 }
 
 // ErrorBytes returns a byte-array representation of an ErrorResponse.
