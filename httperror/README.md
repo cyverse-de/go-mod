@@ -27,7 +27,7 @@ func New() *App {
     r.HTTPErrorHandler = httperror.HTTPErrorHandler
 
     return &App{
-        router: echo.New(),
+        router: r,
     }
 }
 
