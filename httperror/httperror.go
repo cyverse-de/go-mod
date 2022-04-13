@@ -1,18 +1,71 @@
-package logging
+package httperror
 
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/cyverse-de/go-mod/logging"
+	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 )
+
+var Log = logging.Log.WithFields(logrus.Fields{"package": "httperror"})
+
+// HTTPErrorHandler is an echo.HTTPErrorHandler for this application.
+func HTTPErrorHandler(err error, c echo.Context) {
+	code := http.StatusInternalServerError
+	var body interface{}
+
+	switch t := err.(type) {
+	case ErrorResponse:
+		if t.HTTPStatusCode != 0 {
+			code = t.HTTPStatusCode
+		} else {
+			code = http.StatusBadRequest
+		}
+		body = t
+	case *ErrorResponse:
+		if t.HTTPStatusCode != 0 {
+			code = t.HTTPStatusCode
+		} else {
+			code = http.StatusBadRequest
+		}
+		body = t
+	case *echo.HTTPError:
+		echoErr := t
+
+		code = echoErr.Code
+
+		errResp := ErrorResponse{
+			ErrorCode: echoErr.Code,
+		}
+
+		switch suberr := echoErr.Message.(type) {
+		case string:
+			errResp.Message = suberr
+		case error:
+			errResp.Message = suberr.Error()
+		default:
+			errResp.Message = "unknown message type"
+		}
+
+		body = NewErrorResponse(errResp)
+	default:
+		body = NewErrorResponse(err)
+	}
+
+	c.JSON(code, body) //nolint - lack of return value is required by Echo.
+}
 
 // ErrorResponse represents an HTTP response body containing error information. This type implements
 // the error interface so that it can be returned as an error from from existing functions.
 //
 // swagger:response errorResponse
 type ErrorResponse struct {
-	Message   string                  `json:"message"`
-	ErrorCode int                     `json:"error_code,omitempty"`
-	Details   *map[string]interface{} `json:"details,omitempty"`
+	Message        string                  `json:"message"`
+	ErrorCode      int                     `json:"error_code,omitempty"`
+	HTTPStatusCode int                     `json:"-"`
+	Details        *map[string]interface{} `json:"details,omitempty"`
 }
 
 // ErrorBytes returns a byte-array representation of an ErrorResponse.
