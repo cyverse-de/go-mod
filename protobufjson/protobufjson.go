@@ -37,3 +37,28 @@ func (c *Codec) Decode(subject string, data []byte, vPtr interface{}) error {
 
 	return protojson.Unmarshal(data, msg)
 }
+
+func Unmarshal(data []byte, ptr interface{}) error {
+	if _, ok := ptr.(*interface{}); ok {
+		return nil
+	}
+
+	msg, ok := ptr.(proto.Message)
+	if !ok {
+		return errors.New("invalid protocol buffer message passed to Unmarshal")
+	}
+
+	return protojson.Unmarshal(data, msg)
+}
+
+func Marshal(ptr interface{}) ([]byte, error) {
+	msg, ok := ptr.(proto.Message)
+	if !ok {
+		return nil, errors.New("invalid protocol buffer message passed to Marshal")
+	}
+	b, err := protojson.Marshal(msg)
+	if err != nil {
+		return nil, err
+	}
+	return b, nil
+}
