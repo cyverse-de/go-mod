@@ -1,4 +1,4 @@
-package deprotobuf
+package gotelnats
 
 import (
 	"context"
