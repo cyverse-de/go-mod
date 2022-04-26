@@ -13,7 +13,7 @@ import (
 )
 
 type PBTextMapCarrier struct {
-	header.Header
+	*header.Header
 }
 
 func (p *PBTextMapCarrier) Get(key string) string {
