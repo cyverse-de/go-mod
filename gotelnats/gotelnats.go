@@ -12,7 +12,9 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
-type PBTextMapCarrier header.Header
+type PBTextMapCarrier struct {
+	header.Header
+}
 
 func (p *PBTextMapCarrier) Get(key string) string {
 	v, ok := p.Map[key]
