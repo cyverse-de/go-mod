@@ -2,12 +2,19 @@ package gotelnats
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"log"
+	"os"
+	"time"
 
 	"github.com/cyverse-de/p/go/header"
 	"github.com/nats-io/nats.go"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/jaeger"
 	"go.opentelemetry.io/otel/propagation"
+	"go.opentelemetry.io/otel/sdk/resource"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.7.0"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -109,5 +116,80 @@ func InjectSpan(ctx context.Context, carrier propagation.TextMapCarrier, subject
 	otel.GetTextMapPropagator().Inject(ctx, carrier)
 
 	return ctx, span
+}
 
+type TPShutdownFunc func()
+
+func jaegerTracerProvider(url string) (*tracesdk.TracerProvider, error) {
+	// Create the Jaeger exporter
+	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
+	if err != nil {
+		return nil, err
+	}
+
+	tp := tracesdk.NewTracerProvider(
+		tracesdk.WithBatcher(exp),
+		tracesdk.WithResource(resource.NewWithAttributes(
+			semconv.SchemaURL,
+			semconv.ServiceNameKey.String("app-exposer"),
+		)),
+	)
+
+	return tp, nil
+}
+
+func OtelEnabled() bool {
+	otelTracesExporter := os.Getenv("OTEL_TRACES_EXPORTER")
+	return otelTracesExporter == "jaeger"
+}
+
+func setupJaegerProvider() (*tracesdk.TracerProvider, error) {
+	jaegerEndpoint := os.Getenv("OTEL_EXPORTER_JAEGER_ENDPOINT")
+	if jaegerEndpoint == "" {
+		return nil, errors.New("jaeger set as OpenTelemetry trace exporter, but no Jaeger endpoint configured")
+	}
+
+	tp, err := jaegerTracerProvider(jaegerEndpoint)
+	if err != nil {
+		return nil, err
+	}
+
+	return tp, nil
+}
+
+func SetupTraceProvider() (context.CancelFunc, TPShutdownFunc, error) {
+	var (
+		tracerProvider *tracesdk.TracerProvider
+		err            error
+	)
+
+	otelTracesExporter := os.Getenv("OTEL_TRACES_EXPORTER")
+
+	switch otelTracesExporter {
+	case "jaeger":
+		tracerProvider, err = setupJaegerProvider()
+	default:
+		err = fmt.Errorf("unsupported tracer provider '%s'", otelTracesExporter)
+	}
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	otel.SetTracerProvider(tracerProvider)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+
+	tracerCtx, cancel := context.WithCancel(context.Background())
+
+	tpShutdown := func(tracerContext context.Context) TPShutdownFunc {
+		return func() {
+			ctx, cancel := context.WithTimeout(tracerContext, time.Second*5)
+			defer cancel()
+			if err := tracerProvider.Shutdown(ctx); err != nil {
+				log.Fatal(err)
+			}
+		}
+	}(tracerCtx)
+
+	return cancel, tpShutdown, nil
 }
