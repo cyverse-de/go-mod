@@ -78,8 +78,13 @@ func StartSpan(carrier propagation.TextMapCarrier, subject string, op Operation)
 		semconv.MessagingProtocolVersionKey.String(nats.Version),
 		semconv.MessagingDestinationKindTopic,
 		semconv.MessagingDestinationKey.String(subject),
-		semconv.MessagingOperationKey.String(op.String()),
 	)
+
+	if op != Send {
+		span.SetAttributes(
+			semconv.MessagingOperationKey.String(op.String()),
+		)
+	}
 
 	return ctx, span
 }
@@ -105,8 +110,13 @@ func InjectSpan(ctx context.Context, carrier propagation.TextMapCarrier, subject
 		semconv.MessagingProtocolVersionKey.String(nats.Version),
 		semconv.MessagingDestinationKindTopic,
 		semconv.MessagingDestinationKey.String(subject),
-		semconv.MessagingOperationKey.String(op.String()),
 	)
+
+	if op != Send {
+		span.SetAttributes(
+			semconv.MessagingOperationKey.String(op.String()),
+		)
+	}
 
 	otel.GetTextMapPropagator().Inject(ctx, carrier)
 
