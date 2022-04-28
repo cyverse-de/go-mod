@@ -76,7 +76,8 @@ func StartSpan(carrier propagation.TextMapCarrier, subject string, op Operation)
 		semconv.MessagingSystemKey.String(natsName),
 		semconv.MessagingProtocolKey.String(natsName),
 		semconv.MessagingProtocolVersionKey.String(nats.Version),
-		semconv.MessagingDestinationKindTopic.Key.String(subject),
+		semconv.MessagingDestinationKindTopic,
+		semconv.MessagingDestinationKey.String(subject),
 		semconv.MessagingOperationKey.String(op.String()),
 	)
 
@@ -102,7 +103,8 @@ func InjectSpan(ctx context.Context, carrier propagation.TextMapCarrier, subject
 		semconv.MessagingSystemKey.String(natsName),
 		semconv.MessagingProtocolKey.String(natsName),
 		semconv.MessagingProtocolVersionKey.String(nats.Version),
-		semconv.MessagingDestinationKindTopic.Key.String(subject),
+		semconv.MessagingDestinationKindTopic,
+		semconv.MessagingDestinationKey.String(subject),
 		semconv.MessagingOperationKey.String(op.String()),
 	)
 
