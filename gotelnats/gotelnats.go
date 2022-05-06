@@ -261,13 +261,15 @@ func Request[ReqType DERequest, RespType DEResponse](
 	// is far easier to deal with than sending out separate service error
 	// messages.
 	respErr := response.GetError()
-	if respErr.ErrorCode != svcerror.ErrorCode_UNSET {
-		if respErr.StatusCode != 0 { // httpStatusCode is optional.
-			err = NewDEServiceError(respErr.ErrorCode, respErr.Message, respErr.StatusCode)
-		} else {
-			err = NewDEServiceError(respErr.ErrorCode, respErr.Message)
+	if respErr != nil {
+		if respErr.ErrorCode != svcerror.ErrorCode_UNSET {
+			if respErr.StatusCode != 0 { // httpStatusCode is optional.
+				err = NewDEServiceError(respErr.ErrorCode, respErr.Message, respErr.StatusCode)
+			} else {
+				err = NewDEServiceError(respErr.ErrorCode, respErr.Message)
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
