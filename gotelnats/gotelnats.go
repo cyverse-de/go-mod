@@ -234,16 +234,14 @@ type DEResponse interface {
 //
 // It is a generic function that can accept requests implementing the DERequest
 // interface and responses implementing the DEResponse interface.
-func Request[ReqType DERequest, Expected DEResponse](
+func Request[ReqType DERequest, RespType DEResponse](
 	ctx context.Context,
 	conn *nats.EncodedConn,
 	subject string,
 	request ReqType,
-) (Expected, error) {
-	var (
-		err   error
-		dePtr Expected
-	)
+	response RespType,
+) error {
+	var err error
 
 	carrier := PBTextMapCarrier{
 		Header: request.GetHeader(),
@@ -253,26 +251,26 @@ func Request[ReqType DERequest, Expected DEResponse](
 	defer span.End()
 
 	// Uses the EncodedCode to unmarshal the data into dePtr.
-	err = conn.Request(subject, request, dePtr, 30*time.Second)
+	err = conn.Request(subject, request, response, 30*time.Second)
 	if err != nil {
-		return dePtr, err
+		return err
 	}
 
 	// Since the potential error details are embedded in the unmarshalled
 	// data, we have to look to make sure it's not set. Believe it or not, this
 	// is far easier to deal with than sending out separate service error
 	// messages.
-	dePtrErr := dePtr.GetError()
-	if dePtrErr.ErrorCode != svcerror.ErrorCode_UNSET {
-		if dePtrErr.StatusCode != 0 { // httpStatusCode is optional.
-			err = NewDEServiceError(dePtrErr.ErrorCode, dePtrErr.Message, dePtrErr.StatusCode)
+	respErr := response.GetError()
+	if respErr.ErrorCode != svcerror.ErrorCode_UNSET {
+		if respErr.StatusCode != 0 { // httpStatusCode is optional.
+			err = NewDEServiceError(respErr.ErrorCode, respErr.Message, respErr.StatusCode)
 		} else {
-			err = NewDEServiceError(dePtrErr.ErrorCode, dePtrErr.Message)
+			err = NewDEServiceError(respErr.ErrorCode, respErr.Message)
 		}
-		return dePtr, err
+		return err
 	}
 
-	return dePtr, nil
+	return nil
 }
 
 // PublishRespone instruments outgoing responses with telemetry information.
