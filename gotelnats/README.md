@@ -8,6 +8,59 @@ default tracer provider based on environment variable configuration.
 
 # Example
 
+Request information from another service using a request type defined as a
+protocol buffer in [github.com/cyverse-de/p](https://github.com/cyverse-de/p)
+and extract the response type. Ensures that errors are returned if the
+responding service sends one back.
+
+Taken from
+[github.com/cyverse-de/discoenv-analyses](https://github.com/cyverse-de/discoenv-analyses).
+
+```go
+func lookupUsername(ctx context.Context, conn *nats.EncodedConn, subject string, userID string) (string, error) {
+	var (
+		err      error
+		request  *pbuser.UserLookupRequest
+		expected *pbuser.User
+	)
+
+	request = &pbuser.UserLookupRequest{
+		LookupIds: &pbuser.UserLookupRequest_UserId{
+			UserId: userID,
+		},
+	}
+
+	expected = &pbuser.User{}
+
+	if err = gotelnats.Request[*pbuser.UserLookupRequest, *pbuser.User](ctx, conn, subject, request, expected); err != nil {
+		return "", err
+	}
+
+	return expected.Username, nil
+```
+
+Respond to a request with a type defined as a protocol buffer in
+[github.com/cyverse-de/p](https://github.com/cyverse-de/p). Handles adding
+telemetry information to the response from the context:
+
+```go
+	if err = gotelnats.PublishResponse(ctx, conn, reply, responseUser); err != nil {
+		log.Error(err)
+	}
+```
+
+Set error data into an outgoing response and send it:
+
+```go
+	responseUser.Error = gotelnats.InitServiceError(ctx, err, &gotelnats.ErrorOptions{
+		ErrorCode: svcerror.ErrorCode_INTERNAL,
+	})
+	if err = gotelnats.PublishResponse(ctx, conn, reply, responseUser); err != nil {
+		log.Error(err)
+	}
+	return
+```
+
 Logic to extract span information from a protocol buffer header field.
 
 ```go
@@ -22,40 +75,4 @@ Logic to extract span information from a protocol buffer header field.
 		ctx, span := gotelnats.StartSpan(&carrier, subject, gotelnats.Process)
 		defer span.End()
 ...
-```
-
-Functions that add span info to the protocol buffer header field for outgoing
-messages.
-
-```go
-func publishResponse(ctx context.Context, conn *nats.EncodedConn, reply string, responseUser *user.User) error {
-	carrier := gotelnats.PBTextMapCarrier{
-		Header: responseUser.Header,
-	}
-
-	_, span := gotelnats.InjectSpan(ctx, &carrier, reply, gotelnats.Send)
-	defer span.End()
-
-	return conn.Publish(reply, &responseUser)
-}
-
-func handleError(ctx context.Context, err error, code svcerror.Code, reply string, conn *nats.EncodedConn) {
-	svcerr := svcerror.Error{
-		ErrorCode: code,
-		Message:   err.Error(),
-	}
-
-	log.Error(&svcerr)
-
-	carrier := gotelnats.PBTextMapCarrier{
-		Header: svcerr.Header,
-	}
-
-	_, span := gotelnats.InjectSpan(ctx, &carrier, reply, gotelnats.Send)
-	defer span.End()
-
-	if err = conn.Publish(reply, &svcerr); err != nil {
-		log.Error(err)
-	}
-}
 ```
