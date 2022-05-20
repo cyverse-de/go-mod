@@ -9,7 +9,7 @@ import (
 
 type Properties struct{}
 
-func Parser() *Properties {
+func PropertiesParser() *Properties {
 	return &Properties{}
 }
 

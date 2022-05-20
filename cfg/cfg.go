@@ -33,14 +33,22 @@ func fileExists(filepath string) (bool, error) {
 	return false, err
 }
 
+type FileType int
+
+const (
+	YAML FileType = iota
+	JavaProperties
+)
+
 // Settings allows for configuration of how a *Koanf instance is created by
 // Init().
 type Settings struct {
-	Delimiter   string // The delimiter passed to Koanf. Defaults to ".".
-	ConfigPath  string // The path to the YAML config. Defaults to DefaultConfigPath.
-	DotEnvPath  string // The path to the dotenv file. Defaults to DefaultDotEnvPath.
-	EnvPrefix   string // The env var prefix to use for lookups. Defaults to DefaultEnvPrefix.
-	StrictMerge bool   // Whether or not to turn on StrictMerge in Koanf. Defaults to false/off.
+	Delimiter   string   // The delimiter passed to Koanf. Defaults to ".".
+	ConfigPath  string   // The path to the YAML config. Defaults to DefaultConfigPath.
+	DotEnvPath  string   // The path to the dotenv file. Defaults to DefaultDotEnvPath.
+	EnvPrefix   string   // The env var prefix to use for lookups. Defaults to DefaultEnvPrefix.
+	StrictMerge bool     // Whether or not to turn on StrictMerge in Koanf. Defaults to false/off.
+	FileType    FileType // What kind of file to parse. Defaults to YAML.
 }
 
 // Init uses the Settings passed in to set up a *Koanf instance in a way that
@@ -87,8 +95,19 @@ func Init(settings *Settings) (*koanf.Koanf, error) {
 		StrictMerge: settings.StrictMerge,
 	})
 
-	// Load from the yaml configuration as the baseline.
-	if err = k.Load(file.Provider(configPath), yaml.Parser()); err != nil {
+	var fp koanf.Parser
+
+	switch settings.FileType {
+	case YAML:
+		fp = yaml.Parser()
+	case JavaProperties:
+		fp = PropertiesParser()
+	default:
+		return nil, errors.New("unknown file type")
+	}
+
+	// Load from the configuration file as the baseline.
+	if err = k.Load(file.Provider(configPath), fp); err != nil {
 		return nil, err
 	}
 
