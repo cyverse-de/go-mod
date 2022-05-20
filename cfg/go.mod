@@ -2,7 +2,10 @@ module github.com/cyverse-de/go-mod/cfg
 
 go 1.18
 
-require github.com/knadh/koanf v1.4.1
+require (
+	github.com/knadh/koanf v1.4.1
+	github.com/magiconair/properties v1.8.6
+)
 
 require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
