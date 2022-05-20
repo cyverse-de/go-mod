@@ -19,8 +19,8 @@ const DefaultDotEnvPath = "/etc/cyverse/de/env/service.env"
 // DefaultConfigPath is the default path to the YAML configuration file.
 const DefaultConfigPath = "/etc/cyverse/de/configs/service.yml"
 
-// DefaultEnvPrefix is the default environment variable prefix used when by
-// Koanf when looking up variables in the process's environment.
+// DefaultEnvPrefix is the default environment variable prefix used by Koanf
+// when looking up variables in the process's environment.
 const DefaultEnvPrefix = "DISCOENV_"
 
 func fileExists(filepath string) (bool, error) {
