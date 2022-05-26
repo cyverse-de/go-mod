@@ -224,6 +224,14 @@ type DEResponse interface {
 	proto.Message
 }
 
+// NewHeader returns a newly created *header.Header with the Map field
+// initialized.
+func NewHeader() *header.Header {
+	return &header.Header{
+		Map: make(map[string]*header.Header_Value),
+	}
+}
+
 // Request handles instrumenting the outgoing request with telemetry info,
 // blocking until the request is responded to, and handling responses containing
 // errors returned by the other service.
