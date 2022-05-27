@@ -17,6 +17,13 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+const DefaultTLSCertPath = "/etc/nats/tls/tls.crt"
+const DefaultTLSKeyPath = "/etc/nats/tls/tls.key"
+const DefaultTLSCAPath = "/etc/nats/tls/ca.crt"
+const DefaultCredsPath = "/etc/nats/creds/services.creds"
+const DefaultMaxReconnects = 10
+const DefaultReconnectWait = 1
+
 type PBTextMapCarrier struct {
 	*header.Header
 }
