@@ -2,12 +2,8 @@ github.com/cyverse-de/go-mod/gotelnats v0.0.10 h1:g1gUuy76K8zDZAWjmM6BFgzRFOHAEs
 github.com/cyverse-de/go-mod/gotelnats v0.0.10/go.mod h1:UDIqvtSCeOKvjV+gZ+DrcPoTHPYkQjIuFxw7IlcbAI0=
 github.com/cyverse-de/p/go/header v0.0.1 h1:YgI0DLIOvL6m0LF22tFUk3OHLtW5NCuNiaGqwkxv64s=
 github.com/cyverse-de/p/go/header v0.0.1/go.mod h1:VHHZzBOwFQLfIrfIjK1FJlaKy00m4CFGufx4LhVXd8Q=
-github.com/cyverse-de/p/go/qms v0.0.1 h1:jgG6NHN8rlH+BEXsOH8t7N7mnrpdY2rpVO/0SrLq5Og=
-github.com/cyverse-de/p/go/qms v0.0.1/go.mod h1:iugEL2/HHd/mSFHdL8KLMSEz65ElJkZFje7prcWNsiA=
-github.com/cyverse-de/p/go/qms v0.0.4 h1:OLPuJiKLUG1v2eleXZQMn5+vBK5b71L4Q1O0+4IoIoc=
-github.com/cyverse-de/p/go/qms v0.0.4/go.mod h1:iugEL2/HHd/mSFHdL8KLMSEz65ElJkZFje7prcWNsiA=
-github.com/cyverse-de/p/go/qms v0.0.5 h1:3hK//SyY1ON6tSry0v2+Ju2TLWvqYxxUG96gHHzMHb4=
-github.com/cyverse-de/p/go/qms v0.0.5/go.mod h1:iugEL2/HHd/mSFHdL8KLMSEz65ElJkZFje7prcWNsiA=
+github.com/cyverse-de/p/go/qms v0.0.6 h1:0EwpXN5XrEhc4RI13BRfisOtb2FuntkbKiFmyosNetk=
+github.com/cyverse-de/p/go/qms v0.0.6/go.mod h1:iugEL2/HHd/mSFHdL8KLMSEz65ElJkZFje7prcWNsiA=
 github.com/cyverse-de/p/go/svcerror v0.0.5 h1:WbUcU4VjbNU0agfrHJOCy9orAY72WJWo92b1vR3+3sw=
 github.com/cyverse-de/p/go/svcerror v0.0.5/go.mod h1:WCGIrhW0KXtSu86YhjU/JXG8LrZs5wJPBCH4wvnFYcQ=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

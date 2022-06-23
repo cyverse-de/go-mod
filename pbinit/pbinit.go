@@ -135,6 +135,12 @@ func NewGetUsages(username string) *qms.GetUsages {
 	}
 }
 
+func NewUsageResponse() *qms.UsageResponse {
+	return &qms.UsageResponse{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 func NewUsageList() *qms.UsageList {
 	return &qms.UsageList{
 		Header: gotelnats.NewHeader(),

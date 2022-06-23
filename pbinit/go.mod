@@ -4,12 +4,12 @@ go 1.18
 
 require (
 	github.com/cyverse-de/go-mod/gotelnats v0.0.10
-	github.com/cyverse-de/p/go/qms v0.0.5
+	github.com/cyverse-de/p/go/header v0.0.1
+	github.com/cyverse-de/p/go/qms v0.0.6
 	go.opentelemetry.io/otel/trace v1.7.0
 )
 
 require (
-	github.com/cyverse-de/p/go/header v0.0.1 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.0.5 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
