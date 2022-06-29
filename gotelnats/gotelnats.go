@@ -290,6 +290,25 @@ func Request[ReqType DERequest, RespType DEResponse](
 	return nil
 }
 
+// Publish instruments outgoing responses with telemetry information.
+// Does not expect a response.
+func Publish[ReqType DERequest](ctx context.Context, conn *nats.EncodedConn, subject string, request ReqType) error {
+	var err error
+
+	carrier := PBTextMapCarrier{
+		Header: request.GetHeader(),
+	}
+
+	_, span := InjectSpan(ctx, &carrier, subject, Send)
+	defer span.End()
+
+	if err = conn.Publish(subject, request); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // PublishRespone instruments outgoing responses with telemetry information.
 // It is a generic function that will accept responses implementing the
 // DEResponse interface. The response should be a pointer to a concrete
