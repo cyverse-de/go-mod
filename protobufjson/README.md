@@ -9,7 +9,7 @@ func main() {
 ...
 	flag.Parse()
 	
-	nats.RegisterEncoder("protojson", &protobufjson.Codec{})
+	nats.RegisterEncoder("protojson", protobufjson.NewCodec(protobufjson.WithEmitUnpopulated()))
 
 ...
 
