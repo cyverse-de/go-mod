@@ -10,7 +10,7 @@ require (
 )
 
 require (
-	github.com/cyverse-de/p/go/monitoring v0.0.1 // indirect
+	github.com/cyverse-de/p/go/monitoring v0.0.2 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.0.5 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
