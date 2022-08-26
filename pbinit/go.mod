@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/cyverse-de/p/go/monitoring v0.0.1 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.0.5 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -22,5 +23,5 @@ require (
 	go.opentelemetry.io/otel v1.7.0 // indirect
 	golang.org/x/crypto v0.0.0-20220315160706-3147a52a75dd // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 )

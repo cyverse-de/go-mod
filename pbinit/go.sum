@@ -2,6 +2,8 @@ github.com/cyverse-de/go-mod/gotelnats v0.0.10 h1:g1gUuy76K8zDZAWjmM6BFgzRFOHAEs
 github.com/cyverse-de/go-mod/gotelnats v0.0.10/go.mod h1:UDIqvtSCeOKvjV+gZ+DrcPoTHPYkQjIuFxw7IlcbAI0=
 github.com/cyverse-de/p/go/header v0.0.1 h1:YgI0DLIOvL6m0LF22tFUk3OHLtW5NCuNiaGqwkxv64s=
 github.com/cyverse-de/p/go/header v0.0.1/go.mod h1:VHHZzBOwFQLfIrfIjK1FJlaKy00m4CFGufx4LhVXd8Q=
+github.com/cyverse-de/p/go/monitoring v0.0.1 h1:kWGoJozNfrypBDVnQ5HY2/zsGbjU7VqTJ0wzwcy03Ns=
+github.com/cyverse-de/p/go/monitoring v0.0.1/go.mod h1:UzSOg02RZ3GEm8iuQu39Hbo8rnYDfZ5XzZnN8UQYCyY=
 github.com/cyverse-de/p/go/qms v0.0.6 h1:0EwpXN5XrEhc4RI13BRfisOtb2FuntkbKiFmyosNetk=
 github.com/cyverse-de/p/go/qms v0.0.6/go.mod h1:iugEL2/HHd/mSFHdL8KLMSEz65ElJkZFje7prcWNsiA=
 github.com/cyverse-de/p/go/svcerror v0.0.5 h1:WbUcU4VjbNU0agfrHJOCy9orAY72WJWo92b1vR3+3sw=
@@ -57,6 +59,8 @@ golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8T
 google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
 google.golang.org/protobuf v1.28.0 h1:w43yiav+6bVFTBQFZX0r7ipe9JQ1QsbMgHwbBziscLw=
 google.golang.org/protobuf v1.28.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
+google.golang.org/protobuf v1.28.1 h1:d0NfwRgPtno5B1Wa6L2DAG+KivqkdutMf1UhdNx175w=
+google.golang.org/protobuf v1.28.1/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c h1:dUUwHk2QECo/6vqA44rthZ8ie2QXMNeKRTHCNY2nXvo=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=

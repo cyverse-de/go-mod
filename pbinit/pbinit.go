@@ -5,6 +5,7 @@ import (
 
 	"github.com/cyverse-de/go-mod/gotelnats"
 	"github.com/cyverse-de/p/go/header"
+	"github.com/cyverse-de/p/go/monitoring"
 	"github.com/cyverse-de/p/go/qms"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -174,8 +175,20 @@ func NewQMSUserList() *qms.QMSUserList {
 	}
 }
 
-// Initialize requests from here on down.
+func NewMonitoringHeartbeat() *monitoring.Heartbeat {
+	return &monitoring.Heartbeat{
+		Header: gotelnats.NewHeader(),
+	}
+}
 
+func NewDNSCheckResult() *monitoring.DNSCheckResult {
+	return &monitoring.DNSCheckResult{
+		Header:  gotelnats.NewHeader(),
+		Lookups: make([]*monitoring.DNSLookup, 0),
+	}
+}
+
+// Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
 		Header: h,
