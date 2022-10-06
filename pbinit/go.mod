@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/cyverse-de/go-mod/gotelnats v0.0.10
 	github.com/cyverse-de/p/go/header v0.0.1
-	github.com/cyverse-de/p/go/qms v0.0.6
+	github.com/cyverse-de/p/go/qms v0.0.8
 	go.opentelemetry.io/otel/trace v1.7.0
 )
 

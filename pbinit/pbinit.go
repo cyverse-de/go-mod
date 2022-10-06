@@ -175,6 +175,33 @@ func NewQMSUserList() *qms.QMSUserList {
 	}
 }
 
+func NewQMSUpdateListRequest() *qms.UpdateListRequest {
+	return &qms.UpdateListRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewQMSUpdateListResponse() *qms.UpdateListResponse {
+	return &qms.UpdateListResponse{
+		Header:  gotelnats.NewHeader(),
+		Updates: make([]*qms.Update, 0),
+	}
+}
+
+func NewAddUpdateRequest(update *qms.Update) *qms.AddUpdateRequest {
+	return &qms.AddUpdateRequest{
+		Header: gotelnats.NewHeader(),
+		Update: update,
+	}
+}
+
+func NewQMSAddUpdateResponse() *qms.AddUpdateResponse {
+	return &qms.AddUpdateResponse{
+		Header: gotelnats.NewHeader(),
+		Update: &qms.Update{},
+	}
+}
+
 func NewMonitoringHeartbeat() *monitoring.Heartbeat {
 	return &monitoring.Heartbeat{
 		Header: gotelnats.NewHeader(),
