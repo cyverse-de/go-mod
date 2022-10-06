@@ -251,3 +251,17 @@ func InitGetUsages(request *qms.GetUsages, subject string) (context.Context, tra
 	}
 	return commonInit(request.Header, subject)
 }
+
+func InitQMSUpdateListRequest(request *qms.UpdateListRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSAddUpdateRequest(request *qms.AddUpdateRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
