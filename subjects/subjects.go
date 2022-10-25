@@ -3,6 +3,8 @@ package subjects
 import "fmt"
 
 const qmsUser = "cyverse.qms.user"
+const cyverseAnalysis = "cyverse.analysis"
+const cyverseMonitoring = "cyverse.monitoring"
 
 var (
 	QMSGetUserUpdates = fmt.Sprintf("%s.updates.get", qmsUser)
@@ -13,4 +15,10 @@ var (
 
 	QMSGetUserUsages = fmt.Sprintf("%s.usages.get", qmsUser)
 	QMSAddUserUsages = fmt.Sprintf("%s.usages.add", qmsUser)
+
+	AnalysisStatus = fmt.Sprintf("%s.status", cyverseAnalysis)
+
+	MonitoringPing      = fmt.Sprintf("%s.ping", cyverseMonitoring)
+	MonitoringDNS       = fmt.Sprintf("%s.dns", cyverseMonitoring)
+	MonitoringHeartbeat = fmt.Sprintf("%s.heartbeat", cyverseMonitoring)
 )
