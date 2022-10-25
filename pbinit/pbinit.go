@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/cyverse-de/go-mod/gotelnats"
+	"github.com/cyverse-de/p/go/analysis"
 	"github.com/cyverse-de/p/go/header"
 	"github.com/cyverse-de/p/go/monitoring"
 	"github.com/cyverse-de/p/go/qms"
@@ -215,6 +216,12 @@ func NewDNSCheckResult() *monitoring.DNSCheckResult {
 	}
 }
 
+func NewAnalysisStatus() *analysis.AnalysisStatus {
+	return &analysis.AnalysisStatus{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 // Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
@@ -260,6 +267,13 @@ func InitQMSUpdateListRequest(request *qms.UpdateListRequest, subject string) (c
 }
 
 func InitQMSAddUpdateRequest(request *qms.AddUpdateRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitAnalysisStatus(request *analysis.AnalysisStatus, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}

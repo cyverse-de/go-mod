@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/cyverse-de/p/go/analysis v0.0.13 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.0.5 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

@@ -1,5 +1,7 @@
 github.com/cyverse-de/go-mod/gotelnats v0.0.10 h1:g1gUuy76K8zDZAWjmM6BFgzRFOHAEsNJFsGwcCg5kOI=
 github.com/cyverse-de/go-mod/gotelnats v0.0.10/go.mod h1:UDIqvtSCeOKvjV+gZ+DrcPoTHPYkQjIuFxw7IlcbAI0=
+github.com/cyverse-de/p/go/analysis v0.0.13 h1:65hbQSnj1sDJcUnDJwMto/ncBxO6PSsWMFuIcyeQZV0=
+github.com/cyverse-de/p/go/analysis v0.0.13/go.mod h1:zI19t8ygFWsXKmcIb6cLAgiPRR+fHHT716hFNPbGDOc=
 github.com/cyverse-de/p/go/header v0.0.1 h1:YgI0DLIOvL6m0LF22tFUk3OHLtW5NCuNiaGqwkxv64s=
 github.com/cyverse-de/p/go/header v0.0.1/go.mod h1:VHHZzBOwFQLfIrfIjK1FJlaKy00m4CFGufx4LhVXd8Q=
 github.com/cyverse-de/p/go/monitoring v0.0.2 h1:oI/zt2a7k66JOKs9z+3QT7EzRYbPee+mgLD6DG+nj8w=
