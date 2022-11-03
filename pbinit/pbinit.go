@@ -266,6 +266,20 @@ func InitQMSUpdateListRequest(request *qms.UpdateListRequest, subject string) (c
 	return commonInit(request.Header, subject)
 }
 
+func InitQMSRequestByUsername(request *qms.RequestByUsername, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSRequestByUserID(request *qms.RequestByUserID, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
 func InitQMSAddUpdateRequest(request *qms.AddUpdateRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
