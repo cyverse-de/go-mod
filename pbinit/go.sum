@@ -12,6 +12,8 @@ github.com/cyverse-de/p/go/qms v0.0.10 h1:yfwNZtHIF1nx5r3RDXZz4iCvEhV17aXZeHtpPn
 github.com/cyverse-de/p/go/qms v0.0.10/go.mod h1:149A1Fx/vO7ovgEXaodYCLPvsX1squLb7u6MaSya3oM=
 github.com/cyverse-de/p/go/qms v0.0.11 h1:VwU99KBNFe+UauZinGjMHH2hAhhHmrv23JjreSwtw6Y=
 github.com/cyverse-de/p/go/qms v0.0.11/go.mod h1:149A1Fx/vO7ovgEXaodYCLPvsX1squLb7u6MaSya3oM=
+github.com/cyverse-de/p/go/qms v0.0.12 h1:wdMDlyoZaKL5oLMRuBajKgva2VoKxOJQ8/820gg4kr4=
+github.com/cyverse-de/p/go/qms v0.0.12/go.mod h1:149A1Fx/vO7ovgEXaodYCLPvsX1squLb7u6MaSya3oM=
 github.com/cyverse-de/p/go/svcerror v0.0.5 h1:WbUcU4VjbNU0agfrHJOCy9orAY72WJWo92b1vR3+3sw=
 github.com/cyverse-de/p/go/svcerror v0.0.5/go.mod h1:WCGIrhW0KXtSu86YhjU/JXG8LrZs5wJPBCH4wvnFYcQ=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
