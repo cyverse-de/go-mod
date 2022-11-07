@@ -222,6 +222,18 @@ func NewAnalysisStatus() *analysis.AnalysisStatus {
 	}
 }
 
+func NewQMSRequestByUsername() *qms.RequestByUsername {
+	return &qms.RequestByUsername{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NEwQMSRequestByUserID() *qms.RequestByUserID {
+	return &qms.RequestByUserID{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 // Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
