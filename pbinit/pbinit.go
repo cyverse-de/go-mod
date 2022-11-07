@@ -228,7 +228,7 @@ func NewQMSRequestByUsername() *qms.RequestByUsername {
 	}
 }
 
-func NEwQMSRequestByUserID() *qms.RequestByUserID {
+func NewQMSRequestByUserID() *qms.RequestByUserID {
 	return &qms.RequestByUserID{
 		Header: gotelnats.NewHeader(),
 	}
