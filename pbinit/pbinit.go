@@ -234,6 +234,24 @@ func NewQMSRequestByUserID() *qms.RequestByUserID {
 	}
 }
 
+func NewChangeUserPlanRequest() *qms.ChangeUserPlanRequest {
+	return &qms.ChangeUserPlanRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewQMSAddUserRequest() *qms.AddUserRequest {
+	return &qms.AddUserRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewQMSAddUserResponse() *qms.AddUserResponse {
+	return &qms.AddUserResponse{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 // Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
@@ -300,6 +318,27 @@ func InitQMSAddUpdateRequest(request *qms.AddUpdateRequest, subject string) (con
 }
 
 func InitAnalysisStatus(request *analysis.AnalysisStatus, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitChangeUserPlanRequest(request *qms.ChangeUserPlanRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSAddUserRequest(request *qms.AddUserRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSAddUserResponse(request *qms.AddUserResponse, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
