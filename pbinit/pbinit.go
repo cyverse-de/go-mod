@@ -344,3 +344,10 @@ func InitQMSAddUserResponse(request *qms.AddUserResponse, subject string) (conte
 	}
 	return commonInit(request.Header, subject)
 }
+
+func InitQMSAddQuotaRequest(request *qms.AddQuotaRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
