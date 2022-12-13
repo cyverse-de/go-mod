@@ -252,6 +252,12 @@ func NewQMSAddUserResponse() *qms.AddUserResponse {
 	}
 }
 
+func NewQMSNoParamsRequest() *qms.NoParamsRequest {
+	return &qms.NoParamsRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 // Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
@@ -346,6 +352,13 @@ func InitQMSAddUserResponse(request *qms.AddUserResponse, subject string) (conte
 }
 
 func InitQMSAddQuotaRequest(request *qms.AddQuotaRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSNoParamsRequest(request *qms.NoParamsRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
