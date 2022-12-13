@@ -16,7 +16,9 @@ var (
 	AddUser           = fmt.Sprintf("%s.add", qmsUser)
 	GetUserPlan       = fmt.Sprintf("%s.plan.get", qmsUser)
 	ChangeUserPlan    = fmt.Sprintf("%s.plan.change", qmsUser)
-	ListPlans         = fmt.Sprintf("%s.list", qmsPlan)
-	UpdatePlan        = fmt.Sprintf("%s.update", qmsPlan)
-	AddPlan           = fmt.Sprintf("%s.add", qmsPlan)
+	AddQuota          = fmt.Sprintf("%s.quota.add", qmsUser)
+
+	ListPlans  = fmt.Sprintf("%s.list", qmsPlan)
+	UpdatePlan = fmt.Sprintf("%s.update", qmsPlan)
+	AddPlan    = fmt.Sprintf("%s.add", qmsPlan)
 )
