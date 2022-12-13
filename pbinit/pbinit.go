@@ -258,6 +258,24 @@ func NewQMSNoParamsRequest() *qms.NoParamsRequest {
 	}
 }
 
+func NewQMSPlanRequest() *qms.PlanRequest {
+	return &qms.PlanRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewQMSAddPlanRequest() *qms.AddPlanRequest {
+	return &qms.AddPlanRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewQMSAddPlanQuotaDefaultRequest() *qms.AddPlanQuotaDefaultRequest {
+	return &qms.AddPlanQuotaDefaultRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 // Initialize requests from here on down.
 func commonInit(h *header.Header, subject string) (context.Context, trace.Span) {
 	carrier := gotelnats.PBTextMapCarrier{
@@ -359,6 +377,27 @@ func InitQMSAddQuotaRequest(request *qms.AddQuotaRequest, subject string) (conte
 }
 
 func InitQMSNoParamsRequest(request *qms.NoParamsRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSPlanRequest(request *qms.PlanRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSAddPlanRequest(request *qms.AddPlanRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return commonInit(request.Header, subject)
+}
+
+func InitQMSAddPlanQuotaDefaultRequest(request *qms.AddPlanQuotaDefaultRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
