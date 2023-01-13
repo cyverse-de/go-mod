@@ -150,16 +150,16 @@ func NewUsageList() *qms.UsageList {
 	}
 }
 
-func NewUserPlanResponse() *qms.UserPlanResponse {
-	return &qms.UserPlanResponse{
+func NewSubscriptionResponse() *qms.SubscriptionResponse {
+	return &qms.SubscriptionResponse{
 		Header: gotelnats.NewHeader(),
 	}
 }
 
-func NewUserPlanList() *qms.UserPlanList {
-	return &qms.UserPlanList{
-		Header:    gotelnats.NewHeader(),
-		UserPlans: make([]*qms.UserPlan, 0),
+func NewSubscriptionList() *qms.SubscriptionList {
+	return &qms.SubscriptionList{
+		Header:        gotelnats.NewHeader(),
+		Subscriptions: make([]*qms.Subscription, 0),
 	}
 }
 
@@ -234,8 +234,8 @@ func NewQMSRequestByUserID() *qms.RequestByUserID {
 	}
 }
 
-func NewChangeUserPlanRequest() *qms.ChangeUserPlanRequest {
-	return &qms.ChangeUserPlanRequest{
+func NewChangeSubscriptionRequest() *qms.ChangeSubscriptionRequest {
+	return &qms.ChangeSubscriptionRequest{
 		Header: gotelnats.NewHeader(),
 	}
 }
@@ -348,7 +348,7 @@ func InitAnalysisStatus(request *analysis.AnalysisStatus, subject string) (conte
 	return commonInit(request.Header, subject)
 }
 
-func InitChangeUserPlanRequest(request *qms.ChangeUserPlanRequest, subject string) (context.Context, trace.Span) {
+func InitChangeSubscriptionRequest(request *qms.ChangeSubscriptionRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
