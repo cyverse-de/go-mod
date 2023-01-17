@@ -18,8 +18,8 @@ var (
 	UserSummary = fmt.Sprintf("%s.summary.get", qmsUser)
 	AddUser     = fmt.Sprintf("%s.add", qmsUser)
 
-	GetUserPlan    = fmt.Sprintf("%s.plan.get", qmsUser)
-	ChangeUserPlan = fmt.Sprintf("%s.plan.change", qmsUser)
+	GetSubscription    = fmt.Sprintf("%s.plan.get", qmsUser)
+	ChangeSubscription = fmt.Sprintf("%s.plan.change", qmsUser)
 
 	AddQuota = fmt.Sprintf("%s.quota.add", qmsUser)
 
