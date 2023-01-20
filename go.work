@@ -1,12 +1,13 @@
 go 1.18
 
 use (
+	./cfg
+	./gotelnats
 	./httperror
 	./logging
 	./otelutils
-	./protobufjson
-	./gotelnats
-	./cfg
 	./pbinit
+	./protobufjson
+	./restutils
 	./subjects
 )
