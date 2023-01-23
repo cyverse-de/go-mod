@@ -4,6 +4,7 @@ import "fmt"
 
 const qmsUser = "cyverse.qms.user"
 const qmsPlan = "cyverse.qms.plan"
+const qmsAddon = "cyverse.qms.addon"
 
 var (
 	GetUserUpdates = fmt.Sprintf("%s.updates.get", qmsUser)
@@ -28,4 +29,7 @@ var (
 	AddPlan             = fmt.Sprintf("%s.add", qmsPlan)
 	GetPlan             = fmt.Sprintf("%s.get", qmsPlan)
 	UpsertQuotaDefaults = fmt.Sprintf("%s.quota.defaults", qmsPlan)
+
+	AddAddon   = fmt.Sprintf("%s.add", qmsAddon)
+	ListAddons = fmt.Sprintf("%s.list", qmsAddon)
 )
