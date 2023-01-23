@@ -1,11 +1,15 @@
 package qms
 
 import (
+	"context"
+
 	"github.com/cyverse-de/go-mod/gotelnats"
+	"github.com/cyverse-de/go-mod/pbinit/common"
 	"github.com/cyverse-de/p/go/qms"
+	"go.opentelemetry.io/otel/trace"
 )
 
-func NewAddonRequest() *qms.AddAddonRequest {
+func NewAddAddonRequest() *qms.AddAddonRequest {
 	return &qms.AddAddonRequest{
 		Header: gotelnats.NewHeader(),
 	}
@@ -65,4 +69,20 @@ func NewAddonLookupRequest(option AddonLookupRequestOption) *qms.AddonLookupRequ
 	}
 
 	return retval
+}
+
+// Initializers
+
+func InitAddonLookupRequest(request *qms.AddonLookupRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return common.Init(request.Header, subject)
+}
+
+func InitAddAddonRequest(request *qms.AddAddonRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return common.Init(request.Header, subject)
 }
