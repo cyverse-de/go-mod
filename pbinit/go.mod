@@ -7,7 +7,7 @@ require (
 	github.com/cyverse-de/p/go/analysis v0.0.13
 	github.com/cyverse-de/p/go/header v0.0.3
 	github.com/cyverse-de/p/go/monitoring v0.0.2
-	github.com/cyverse-de/p/go/qms v0.1.1
+	github.com/cyverse-de/p/go/qms v0.1.4
 	go.opentelemetry.io/otel/trace v1.7.0
 )
 

@@ -27,6 +27,12 @@ func NewAddonListResponse() *qms.AddonListResponse {
 	}
 }
 
+func NewUpdateAddonRequest() *qms.UpdateAddonRequest {
+	return &qms.UpdateAddonRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 type addonLookupRequestParams struct {
 	usesID   bool
 	id       string
@@ -81,6 +87,13 @@ func InitAddonLookupRequest(request *qms.AddonLookupRequest, subject string) (co
 }
 
 func InitAddAddonRequest(request *qms.AddAddonRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return common.Init(request.Header, subject)
+}
+
+func InitUpdateAddonRequest(request *qms.UpdateAddonRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
