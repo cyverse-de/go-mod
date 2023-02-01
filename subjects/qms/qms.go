@@ -32,8 +32,9 @@ var (
 	GetPlan             = fmt.Sprintf("%s.get", qmsPlan)
 	UpsertQuotaDefaults = fmt.Sprintf("%s.quota.defaults", qmsPlan)
 
-	AddAddon    = fmt.Sprintf("%s.add", qmsAddon)
-	ListAddons  = fmt.Sprintf("%s.list", qmsAddon)
-	UpdateAddon = fmt.Sprintf("%s.update", qmsAddon)
-	DeleteAddon = fmt.Sprintf("%s.delete", qmsAddon)
+	AddAddon        = fmt.Sprintf("%s.add", qmsAddon)
+	ListAddons      = fmt.Sprintf("%s.list", qmsAddon)
+	UpdateAddon     = fmt.Sprintf("%s.update", qmsAddon)
+	DeleteAddon     = fmt.Sprintf("%s.delete", qmsAddon)
+	ToggleAddonPaid = fmt.Sprintf("%s.togglepaid", qmsAddon)
 )
