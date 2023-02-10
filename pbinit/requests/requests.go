@@ -46,6 +46,12 @@ func NewByUUIDAndUserID() *requests.ByUUIDAndUserID {
 	}
 }
 
+func NewAssociateByUUIDs() *requests.AssociateByUUIDs {
+	return &requests.AssociateByUUIDs{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 func InitByUsername(request *requests.ByUsername, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
@@ -82,6 +88,13 @@ func InitByUUIDAndUsername(request *requests.ByUUIDAndUsername, subject string) 
 }
 
 func InitByUUIDAndUserID(request *requests.ByUUIDAndUserID, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return common.Init(request.Header, subject)
+}
+
+func InitAssociateByUUIDs(request *requests.AssociateByUUIDs, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}

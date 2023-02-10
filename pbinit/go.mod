@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/cyverse-de/p/go/qms v0.1.6 // indirect
-	github.com/cyverse-de/p/go/requests v0.0.1 // indirect
+	github.com/cyverse-de/p/go/requests v0.0.2 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.0.7 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
