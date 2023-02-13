@@ -33,6 +33,24 @@ func NewUpdateAddonRequest() *qms.UpdateAddonRequest {
 	}
 }
 
+func NewUpdateSubscriptionAddonRequest() *qms.UpdateSubscriptionAddonRequest {
+	return &qms.UpdateSubscriptionAddonRequest{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewSubscriptionAddonResponse() *qms.SubscriptionAddonResponse {
+	return &qms.SubscriptionAddonResponse{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
+func NewSubscriptionAddonListResponse() *qms.SubscriptionAddonListResponse {
+	return &qms.SubscriptionAddonListResponse{
+		Header: gotelnats.NewHeader(),
+	}
+}
+
 type addonLookupRequestParams struct {
 	usesID   bool
 	id       string
@@ -94,6 +112,13 @@ func InitAddAddonRequest(request *qms.AddAddonRequest, subject string) (context.
 }
 
 func InitUpdateAddonRequest(request *qms.UpdateAddonRequest, subject string) (context.Context, trace.Span) {
+	if request.Header == nil {
+		request.Header = gotelnats.NewHeader()
+	}
+	return common.Init(request.Header, subject)
+}
+
+func InitUpdateSubscriptionAddonRequest(request *qms.UpdateSubscriptionAddonRequest, subject string) (context.Context, trace.Span) {
 	if request.Header == nil {
 		request.Header = gotelnats.NewHeader()
 	}
