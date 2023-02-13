@@ -8,6 +8,8 @@ const qmsUser = "cyverse.qms.user"
 const qmsPlan = "cyverse.qms.plan"
 const qmsAddon = "cyverse.qms.addon"
 
+var qmsSubAddon = fmt.Sprintf("%s.plan.addons", qmsUser)
+
 var (
 	GetUserUpdates = fmt.Sprintf("%s.updates.get", qmsUser)
 	AddUserUpdate  = fmt.Sprintf("%s.updates.add", qmsUser)
@@ -21,8 +23,13 @@ var (
 	UserSummary = fmt.Sprintf("%s.summary.get", qmsUser)
 	AddUser     = fmt.Sprintf("%s.add", qmsUser)
 
-	GetSubscription    = fmt.Sprintf("%s.plan.get", qmsUser)
-	ChangeSubscription = fmt.Sprintf("%s.plan.change", qmsUser)
+	GetSubscription         = fmt.Sprintf("%s.plan.get", qmsUser)
+	ChangeSubscription      = fmt.Sprintf("%s.plan.change", qmsUser)
+	ListSubscriptionAddons  = fmt.Sprintf("%s.list", qmsSubAddon)
+	AddSubscriptionAddon    = fmt.Sprintf("%s.add", qmsSubAddon)
+	UpdateSubscriptionAddon = fmt.Sprintf("%s.update", qmsSubAddon)
+	DeleteSubscriptionAddon = fmt.Sprintf("%s.delete", qmsSubAddon)
+	GetSubscriptionAddon    = fmt.Sprintf("%s.get", qmsSubAddon)
 
 	AddQuota = fmt.Sprintf("%s.quota.add", qmsUser)
 
