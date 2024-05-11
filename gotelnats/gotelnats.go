@@ -190,15 +190,15 @@ func InitServiceError(ctx context.Context, err error, opts *ErrorOptions) *svcer
 	span.RecordError(err)
 	span.SetStatus(codes.Error, err.Error())
 
-	switch err.(type) {
+	switch e := err.(type) {
 	case DEServiceError:
-		svcErr = err.(DEServiceError).ServiceError
+		svcErr = e.ServiceError
 	case *DEServiceError:
-		svcErr = err.(*DEServiceError).ServiceError
+		svcErr = e.ServiceError
 	default:
 		svcErr = &svcerror.ServiceError{
 			ErrorCode: svcerror.ErrorCode_UNSPECIFIED,
-			Message:   err.Error(),
+			Message:   e.Error(),
 		}
 	}
 

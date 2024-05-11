@@ -1,3 +1,3 @@
 module github.com/cyverse-de/go-mod/restutils
 
-go 1.19
+go 1.22
