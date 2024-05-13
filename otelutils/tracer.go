@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
@@ -55,10 +55,10 @@ func otelResource(ctx context.Context, serviceName string) (*resource.Resource, 
 	return res, nil
 }
 
-// Get a TracerProvider using Jaeger as the exporter
-func jaegerTracerProvider(ctx context.Context, serviceName, url string) (*tracesdk.TracerProvider, error) {
-	// Create the Jaeger exporter
-	exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(url)))
+// Get a TracerProvider using OTLP as the exporter
+func otlptracerpcTracerProvider(ctx context.Context, serviceName, url string) (*tracesdk.TracerProvider, error) {
+	// Create the exporter
+	exp, err := otlptracegrpc.New(ctx, otlptracegrpc.WithEndpoint(url))
 	if err != nil {
 		return nil, err
 	}
@@ -76,8 +76,9 @@ func jaegerTracerProvider(ctx context.Context, serviceName, url string) (*traces
 	return tp, nil
 }
 
-// Get a TracerProvider using the OTEL_* environment variables to determine
-// configuration. Currently, only supports a Jaeger exporter.
+// Get a TracerProvider using the OTEL_* environment variables to determine configuration. Currently, only supports the
+// OTLP exporter. Jager also uses the OTLP exporter, but support for the "jaeger" exporter setting is retained for
+// backward compatibility.
 func TracerProviderFromEnv(ctx context.Context, serviceName string, onErr func(error)) func() {
 	var (
 		tracerProvider *tracesdk.TracerProvider
@@ -95,7 +96,19 @@ func TracerProviderFromEnv(ctx context.Context, serviceName string, onErr func(e
 			onErr(errors.New("Jaeger set as OpenTelemetry trace exporter, but no Jaeger endpoint configured."))
 			return func() {}
 		} else {
-			tracerProvider, err = jaegerTracerProvider(ctx, serviceName, jaegerEndpoint)
+			tracerProvider, err = otlptracerpcTracerProvider(ctx, serviceName, jaegerEndpoint)
+			if err != nil {
+				onErr(err)
+				return func() {}
+			}
+		}
+	} else if otelTracesExporter == "otlp" {
+		otlpEndpoint := os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
+		if otlpEndpoint == "" {
+			onErr(errors.New("OTLP set as OpenTelemetry trace exporter, but no OTLP endpoint configured."))
+			return func() {}
+		} else {
+			tracerProvider, err = otlptracerpcTracerProvider(ctx, serviceName, otlpEndpoint)
 			if err != nil {
 				onErr(err)
 				return func() {}

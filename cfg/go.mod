@@ -1,6 +1,6 @@
 module github.com/cyverse-de/go-mod/cfg
 
-go 1.18
+go 1.22
 
 require (
 	github.com/knadh/koanf v1.4.1
