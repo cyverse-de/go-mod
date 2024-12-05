@@ -2,4 +2,4 @@ module github.com/cyverse-de/go-mod/protobufjson
 
 go 1.22
 
-require google.golang.org/protobuf v1.37.0
+require google.golang.org/protobuf v1.35.2

@@ -8,7 +8,7 @@ require (
 	github.com/nats-io/nats.go v1.37.0
 	go.opentelemetry.io/otel v1.26.0
 	go.opentelemetry.io/otel/trace v1.26.0
-	google.golang.org/protobuf v1.37.0
+	google.golang.org/protobuf v1.35.2
 )
 
 require (
