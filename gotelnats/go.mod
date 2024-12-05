@@ -5,10 +5,10 @@ go 1.22
 require (
 	github.com/cyverse-de/p/go/header v0.0.4
 	github.com/cyverse-de/p/go/svcerror v0.0.8
-	github.com/nats-io/nats.go v1.34.1
+	github.com/nats-io/nats.go v1.37.0
 	go.opentelemetry.io/otel v1.26.0
 	go.opentelemetry.io/otel/trace v1.26.0
-	google.golang.org/protobuf v1.34.1
+	google.golang.org/protobuf v1.37.0
 )
 
 require (

@@ -1,14 +1,14 @@
 module github.com/cyverse-de/go-mod/pbinit
 
-go 1.22
+go 1.23.3
 
 require (
-	github.com/cyverse-de/go-mod/gotelnats v0.0.11
+	github.com/cyverse-de/go-mod/gotelnats v0.0.13
 	github.com/cyverse-de/p/go/analysis v0.0.16
 	github.com/cyverse-de/p/go/header v0.0.4
 	github.com/cyverse-de/p/go/monitoring v0.0.5
-	github.com/cyverse-de/p/go/qms v0.1.13
-	github.com/cyverse-de/p/go/requests v0.0.2
+	github.com/cyverse-de/p/go/qms v0.1.15
+	github.com/cyverse-de/p/go/requests v0.0.3
 	go.opentelemetry.io/otel/trace v1.26.0
 )
 
@@ -27,5 +27,5 @@ require (
 	go.opentelemetry.io/otel/metric v1.26.0 // indirect
 	golang.org/x/crypto v0.23.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	google.golang.org/protobuf v1.35.2 // indirect
 )
