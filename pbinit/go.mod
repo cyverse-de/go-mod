@@ -2,6 +2,8 @@ module github.com/cyverse-de/go-mod/pbinit
 
 go 1.23.3
 
+replace github.com/cyverse-de/go-mod/gotelnats => ../gotelnats
+
 require (
 	github.com/cyverse-de/go-mod/gotelnats v0.0.15
 	github.com/cyverse-de/p/go/analysis v0.0.16
@@ -20,7 +22,7 @@ require (
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
-	github.com/nats-io/nats.go v1.34.1 // indirect
+	github.com/nats-io/nats.go v1.37.0 // indirect
 	github.com/nats-io/nkeys v0.4.7 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	go.opentelemetry.io/otel v1.26.0 // indirect
