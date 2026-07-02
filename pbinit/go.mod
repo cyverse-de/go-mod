@@ -18,6 +18,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cyverse-de/p/go/apps v0.1.0 // indirect
 	github.com/cyverse-de/p/go/containers v0.1.0 // indirect
+	github.com/cyverse-de/p/go/ptypes v0.1.0 // indirect
 	github.com/cyverse-de/p/go/svcerror v0.1.0 // indirect
 	github.com/cyverse-de/p/go/user v0.1.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
