@@ -15,7 +15,6 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 	semconv "go.opentelemetry.io/otel/semconv/v1.7.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/protobuf/proto"
 )
 
 const DefaultTLSCertPath = "/etc/nats/tls/tls.crt"
@@ -216,20 +215,16 @@ func InitServiceError(ctx context.Context, err error, opts *ErrorOptions) *svcer
 }
 
 // DERequest is a constraint interface that says that types must include a
-// Header implementation an be a protocol buffer message type.
+// Header implementation.
 type DERequest interface {
 	GetHeader() *header.Header
-
-	proto.Message
 }
 
 // DEResponse is a constraint interface that says that types must include a
-// Header and ServiceError implementation and be a protocol buffer message type.
+// Header and ServiceError implementation.
 type DEResponse interface {
 	GetHeader() *header.Header
 	GetError() *svcerror.ServiceError
-
-	proto.Message
 }
 
 // NewHeader returns a newly created *header.Header with the Map field

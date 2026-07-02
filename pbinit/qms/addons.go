@@ -83,13 +83,9 @@ func NewAddonLookupRequest(option AddonLookupRequestOption) *qms.AddonLookupRequ
 	}
 
 	if settings.usesName {
-		retval.Addon = &qms.AddonLookupRequest_Name{
-			Name: settings.name,
-		}
+		retval.Name = &settings.name
 	} else {
-		retval.Addon = &qms.AddonLookupRequest_Uuid{
-			Uuid: settings.id,
-		}
+		retval.Uuid = &settings.id
 	}
 
 	return retval
