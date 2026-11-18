@@ -3,26 +3,26 @@ module github.com/cyverse-de/go-mod/pbinit
 go 1.27
 
 require (
-	github.com/cyverse-de/go-mod/gotelnats v0.1.0
-	github.com/cyverse-de/p/go/analysis v0.1.0
-	github.com/cyverse-de/p/go/header v0.1.0
-	github.com/cyverse-de/p/go/monitoring v0.1.0
-	github.com/cyverse-de/p/go/qms v0.3.2
-	github.com/cyverse-de/p/go/requests v0.1.0
+	github.com/cyverse-de/go-mod/gotelnats v0.1.1
+	github.com/cyverse-de/p/go/analysis v0.1.2
+	github.com/cyverse-de/p/go/header v0.1.1
+	github.com/cyverse-de/p/go/monitoring v0.1.2
+	github.com/cyverse-de/p/go/qms v0.3.4
+	github.com/cyverse-de/p/go/requests v0.1.2
 	go.opentelemetry.io/otel/trace v1.47.0
 )
 
 require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/cyverse-de/p/go/apps v0.1.0 // indirect
-	github.com/cyverse-de/p/go/containers v0.1.0 // indirect
-	github.com/cyverse-de/p/go/ptypes v0.1.0 // indirect
-	github.com/cyverse-de/p/go/svcerror v0.1.0 // indirect
-	github.com/cyverse-de/p/go/user v0.1.0 // indirect
+	github.com/cyverse-de/p/go/apps v0.1.2 // indirect
+	github.com/cyverse-de/p/go/containers v0.1.2 // indirect
+	github.com/cyverse-de/p/go/ptypes v0.1.1 // indirect
+	github.com/cyverse-de/p/go/svcerror v0.1.2 // indirect
+	github.com/cyverse-de/p/go/user v0.1.2 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/klauspost/compress v1.20.4 // indirect
-	github.com/nats-io/nats.go v1.55.0 // indirect
+	github.com/nats-io/nats.go v1.56.0 // indirect
 	github.com/nats-io/nkeys v0.4.17 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
